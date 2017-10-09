@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Shooting Darts at Random"
-date:       2017-10-09 16:27:48 +0000
+date:       2017-10-09 12:27:49 -0400
 permalink:  shooting_darts_at_random
 ---
 
