@@ -42,7 +42,13 @@ or this
 
 ```
 
-Or any other possible solution that one can find in a simple google search when looking for inspiration. Putting those bad boys into an array seems clearer to me. But run that through the IDE, it's not working because that doesn't account for possible multiple occurrences of characters. 
+and I most certainly wouldn't attempt this, although this is what Regex looks like to my featherbrained mind a lot of the time
+
+```
+¯\_(ツ)_/¯ 
+```
+
+Putting those bad boys into an array seems clearer to me. But run that through the IDE, it's not working because that doesn't account for possible multiple occurrences of characters. 
 
 And isn't there something, some character that counts for one or more of these occurrences? Where is Mr. Kleene when you need him? The Kleene Star, my new best friend, because adding a handy-dandy little "+" on the outside of your array shall account for multiple's and split self at all the right possible places. So the code becomes:
 
