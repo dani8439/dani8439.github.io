@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Just Keep Swimming"
-date:       2017-11-07 01:52:39 +0000
+date:       2017-11-06 20:52:40 -0500
 permalink:  just_keep_swimming
 ---
 
@@ -14,7 +14,7 @@ Imagine my chagrin upon reaching OO Counting Sentences lab. There I was, breezin
 
 Then we reach the final question, which is usually the hardest one and usually the one that leaves me feeling as if I'm banging my head against a brick wall.  
 
-After some googling (like you do), searching for "using multiple delimiters with .split in Ruby", old ye internet gods were pointing in one glaringly obviously direction. But really guys... sometimes...
+After some googling (like you do), searching for "using multiple delimiters with .split in Ruby", ye old internet gods were pointing in one glaringly obviously direction. But really guys... sometimes...
 
 <iframe src="https://giphy.com/embed/PtQrzJUJ7Q9d6" width="480" height="203" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/the-sandlot-youre-killing-me-smalls-PtQrzJUJ7Q9d6">via GIPHY</a></p>
 
