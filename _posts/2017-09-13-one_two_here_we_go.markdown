@@ -20,7 +20,7 @@ I also happened to think that I sucked at it, so there's that too.
 
 Some people take a straight path from point A to point B, and others stop and start, veering off into the land of uncertainty, and eventually find themselves at some place without ever realizing how on earth they got there. I think I took a U-Turn some time back, and haven't precisely known how to get back onto the main track. Of late however, I've had hope of steering things back onto a somewhat more navigable course. 
 
-Coding is that next step. Not so far removed from architecture and design, but different enough, and certainly challenging enough. Enough of a puzzle that can give the same kind of satisfaction I've felt in the passed, when things end up working out. 
+Coding is that next step. Not so far removed from architecture and design, but different enough, and certainly challenging enough. Enough of a puzzle that can give the same kind of satisfaction I've felt in the past, when things end up working out. 
 
 Here's to hoping it works out too.
 
