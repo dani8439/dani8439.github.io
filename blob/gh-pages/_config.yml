@@ -1,1 +1,22 @@
 
+# Site settings
+title: What is this place
+header-img: img/home-bg.png
+email: dani8439@aol.com
+copyright_name: dani8439
+description: > # this means to ignore newlines until "baseurl:"
+  how did I get here?
+baseurl: "https://dani8439.github.io" # the subpath of your site, e.g. /blog
+twitter_username: 
+github_username:  dani8439
+learn_profile: dani8439
+email_username: dani8439@aol.com
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+paginate: 5
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+
+gems: [jekyll-paginate, jekyll-feed]
