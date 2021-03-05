@@ -152,10 +152,11 @@ Then each hash of quote information can be popped into the `newQuotes` array, an
   }
 ```
 
+
 # Deleting and what a bugger it is. 
 I had already completed MVP for the project, and JavaScript has felt like an enormous headache for me from start to finish. The gap between where my knowledge of it is, and application is vast. But that is the life of a coder, and in a constant search for the answers I do hope one day I feel on much stronger footing in terms of where my capabilities lay. 
 
-Because of how the code was structured, and how once the `DOMContentLoaded()`, and how edit buttons are dynamically added to the page, putting an event listener on it directly is somewhat impossible. The same thing goes with a delete button. Originally how things were written, the event listener is placed on the parent element, the `<div>` and then rendered down to the children. When trying to do so for delete however, when trying to place an event listener on the delete button itself, and then console.log out the data, I was met with the dreaded `undefined undefined undefined undefined undefined`. And when trying to work around that by calling things by it's id to then pull all that data out of the database and manipulate it in the DOM, again I came up against a bit of a brick wall.
+Because of how the code was structured, and how once the `DOMContentLoaded()`, and how edit buttons are dynamically added to the page, putting an event listener on it directly can be tricky. The same thing goes with a delete button. Originally how things were written, the event listener is placed on the parent element, the `<div>` and then rendered down to the children. When trying to do so for delete however, and trying to place an event listener on the delete button itself following the same pattern, and then console.log out the data, I was met with the dreaded `undefined undefined undefined undefined undefined`. When trying to work around that by calling things by it's id to then pull all that data out of the database and manipulate it in the DOM, again I came up against a bit of a brick wall.
 
 Discussing this problem with a fellow coding friend, there is always a solution, just as there is always 100 ways to write the same code, but it meant rejigging my code as is. 
 
