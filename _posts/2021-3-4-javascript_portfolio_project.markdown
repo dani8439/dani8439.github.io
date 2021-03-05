@@ -168,7 +168,7 @@ Enter `Async/Await` which are promises but with some syntactic sugar. Instead of
 
 Placing the word `async` before a function means that a function will always return a promise. Using the keyword of `await` means that Javascript waits until a promise is settled, before it returns the result. It means getting to avoid chaining things together within callbacks and using `.then()` to create an anonymous function to handle our result. You also get to avoid nesting your code. 
 
-My original code calls the function `getBooks()` when the DOM loads, rendering out each individual book card to `#book-container` in the html. It also places event Listeners on the events like clicking on a new book, or updating the book, which subsequently calls the functions that will then render this data out to the DOM, and here is where the event listeners are called on the parent, and then delegated down to the children. 
+My original code calls the function `getBooks()` when the DOM loads, rendering out each individual book card to `#book-container` in the html. It also places event Listeners on the events like clicking on a new book, or updating the book, which subsequently calls the functions that will then render this data out to the DOM. 
 
 ```
 document.addEventListener('DOMContentLoaded', () => {
