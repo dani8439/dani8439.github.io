@@ -155,9 +155,9 @@ Then each hash of quote information can be popped into the `newQuotes` array, an
 # Deleting and what a bugger it is. 
 I had already completed MVP for the project, and JavaScript has felt like an enormous headache for me from start to finish. The gap between where my knowledge of it is, and application is vast. But that is the life of a coder, and in a constant search for the answers I do hope one day I feel on much stronger footing in terms of where my capabilities lay. 
 
-Because of how the code was structured, and how once the `DOMContentLoaded()`, I couldn't just place a delete button onto each book in the same way I had done with the edit button. When trying to do so, and `console.log` out all the data, I again met with the dreaded `undefined undefined undefined undefined undefined`. And when trying to work around that by calling things by it's `id` to then pull all that data out of the database and manipulate it in the DOM, again I came up against a bit of a brick wall. 
+Because of how the code was structured, and how once the `DOMContentLoaded()`, and how edit buttons are dynamically added to the page, putting an event listener on it directly is somewhat impossible. The same thing goes with a delete button. Originally how things were written, the event listener is placed on the parent element, the `<div>` and then rendered down to the children. When trying to do so for delete however, when trying to place an event listener on the delete button itself, and then console.log out the data, I was met with the dreaded `undefined undefined undefined undefined undefined`. And when trying to work around that by calling things by it's id to then pull all that data out of the database and manipulate it in the DOM, again I came up against a bit of a brick wall.
 
-Discussing this problem with a fellow coding friend, it turns out that of course there is a solution (there always is), but it meant rejigging my code as is. 
+Discussing this problem with a fellow coding friend, there is always a solution, just as there is always 100 ways to write the same code, but it meant rejigging my code as is. 
 
 A JavaScript promise is an object that may produce a single value some time in the future. It can be in a state of either fulfilled, rejected, or pending. As soon as you invoke one, it'll start to do the work. JavaScript is eager. It wants to start doing the work immediately even if all the information is not there when called. As JavaScript is synchronous by default, and single threaded, it wants to execute one block of code at a time, and won't do anything else until that first one is finished before moving on. But by using AJAX calls, and fetch, we try to work around that and create asynchronous code, so that a page doesn't have to be reloaded as data is sent back and forth. The fetch function retrieves data, and within our first `.then()` we capture our object, parse it into JSON or text, return this JSON-ified response. Then, in our next method call, inside of our second, `.then()` we go on to manipulate the data inside of this second callback function, and the DOM using all the info we received from fetch. 
 
@@ -167,7 +167,7 @@ Enter `Async/Await` which are promises but with some syntactic sugar. Instead of
 
 Placing the word `async` before a function means that a function will always return a promise. Using the keyword of `await` means that Javascript waits until a promise is settled, before it returns the result. It means getting to avoid chaining things together within callbacks and using `.then()` to create an anonymous function to handle our result. You also get to avoid nesting your code. 
 
-My original code calls the function `getBooks()` when the DOM loads, rendering out each individual book card to `#book-container` in the html. It also places event Listeners on the events like clicking on a new book, or updating the book, which subsequently calls the functions that will then render this data out to the DOM.  
+My original code calls the function `getBooks()` when the DOM loads, rendering out each individual book card to `#book-container` in the html. It also places event Listeners on the events like clicking on a new book, or updating the book, which subsequently calls the functions that will then render this data out to the DOM, and here is where the event listeners are called on the parent, and then delegated down to the children. 
 
 ```
 document.addEventListener('DOMContentLoaded', () => {
@@ -226,3 +226,34 @@ async function getBooks() {
     })
 }
 ```
+
+By writing two new functions, `deleteBook()` and `editBook()` it's also possible to move some of the logic out of the original event listener and into the functions themselves.
+
+```
+  async function deleteBook(e) {
+    const bookId = e.srcElement.dataset.id;
+    const response = await fetch(`http://localhost:3000/api/v1/books/${bookId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    const resp = await response.json();
+    const book = Book.findById(bookId);
+    book.remove();
+    console.log('removed');
+  }
+
+  function editBook(e) {
+    const id = e.srcElement.dataset.id;
+    const book = Book.findById(id);
+    document.querySelector('#update-book').innerHTML = book.renderUpdateForm();
+    document.querySelector('#new-quote').innerHTML = book.renderNewQuote();
+  }
+```
+The result is that the code looks cleaner, it makes more sense to me at least, than figuring out how to encapsulate the logic with the previous method in the event listener. And also that both delete and edit now work. 
+
+At the moment however, even though it works, I'm not entirely certain _how_ it works. For the time being, I am leaving all this latter logic on a different branch in my github repository and not pushing up to the master branch. I would like to have a better understanding of it, before discussing it, but who knows, maybe after moving onto React these things will make more sense so that by the time I can schedule my portfolio review, I'll feel confident enough to talk about it. 
+
+If you've stayed with me to the end, thank you. Learning this has been frustrating and enlightening, but thankfully I've kept all my hair and have not thrown the entire computer out, as was suggested by fellow students in debugging sessions earlier on in the project. 
