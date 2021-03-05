@@ -6,7 +6,7 @@ for any of the reasons why a quote stands out.
 
 # The first hurdle
 
-I wanted a user to be able to save both a book, and multiple quotes at the time of initial instantiation of a book instance. I wanted the models to be that a 
+I wanted a user to be able to save both a book, and multiple quotes at the time of initial instantiation of a book object. I wanted the models to be that a 
 Book model `has_many :quotes` and that Quote model. `belongs_to :book`. 
 
 Reading the ActiveRecord documentation, by default, nested attribute updating is turned off. But it can be turned on by using the `accepts_nested_attributes_for :quotes` in the parent model of Book. This then defines an attribute writer on the parent model for the child in order to write all associated attributes. In the case of a one-to-many association, there were a few hiccups, that in retrospect seemed stupid but are very easy to make. 
@@ -31,7 +31,7 @@ instance of the quote class:
 ```
 
 
-Once the models were set up properly and working, passing the information through the front end to back end is pretty straightforward. So long as you remember to pluralize things correctly when the data is sent through the fetch call. As you can tell, I did not remember to do that initially, and so while a book model was saving perfectly well, I was getting the dreaded undefined for all the children. Once the error was caught, remembering to pluralize the data as quotes_attributes, and then passing it as as array of hashes of all the children means that a user can save a single book instance, with five children.
+Once the models were set up properly and working, passing the information through the front end to back end is pretty straightforward. So long as you remember to pluralize things correctly when the data is sent through the fetch call. As you can tell, I did not remember to do that initially, and so while a book model was saving perfectly well, I was getting the dreaded `undefined` for all the children. Once the error was caught, remembering to pluralize the data as quotes_attributes, and then passing it as as array of hashes of all the children means that a user can save a single book instance, with five children.
 
 
 ```
@@ -80,7 +80,7 @@ Once the models were set up properly and working, passing the information throug
 
 While initially a user can save up to five quotes for a book, in reality I wanted a user to have the capability of saving as many quotes as possible to any given book. In order to do that, playing around with looping, and hidden_fields made such a thing possible. 
 
-In a `renderUpdateForm()` function in `book.js` there is a hidden field called `quote_count`, with a counter that is set up to loop through the array of quotes and count as each quote is rendered to the dom. The counter is also attached to the attribute of `id` for `input-quote` so that when viewing the information 
+In a `renderUpdateForm()` function in `book.js` there is a hidden field called `quote_count`, with a counter that is set up to loop through the array of quotes and count as each quote is rendered to the DOM. The counter is also attached to the attribute of `id` for `input-quote` so that when viewing the information 
 in the elements tab on the console in the edit-form, each quote using string interpolation now has an id of `input-quote1` or `input-quote2` and so on, as the 
 counter loops through this array. 
 
@@ -96,7 +96,7 @@ counter loops through this array.
 
 <img width="656" alt="Screen Shot 2021-03-04 at 2 42 51 PM" src="https://user-images.githubusercontent.com/26771302/110021059-48337e80-7cf8-11eb-8297-a687c466ed0a.png">
 
-That counter is then also used within the `updateFormHandler()` function, a function used in order to grab all of the information from the updated book, and has an Event Listener attached to it so that whenever a user 'clicks' on the save book button, all updated information is saved to the DOM and to the database. 
+That counter is then also used within the `updateFormHandler()` function, a function used in order to grab all of the information from the updated book, and has an Event Listener attached to it so that whenever a user 'clicks' on the save book button, all updated information is saved to the database, and in the DOM. 
 
 ```
   function updateFormHandler(e) {
