@@ -228,3 +228,9 @@ And when on the webpage itself a user will see either this:
 Or this, depending on the truthy or falsy value of `hideEdit`:
 
 <img width="1405" alt="Screen Shot 2021-05-28 at 4 05 42 PM" src="https://user-images.githubusercontent.com/26771302/120037048-018bb280-bfcf-11eb-9c0b-6cdd03132f19.png">
+
+I used a similar logic, toggling between truthy and falsy within the Collection.js Component as well, so that an edit form appears to edit a collection when the edit button is clicked. It's written a little bit differently, as Collection.js is a functional component and not a class component, and I dabbled a little bit with my first hook `useState`. 
+
+If there's anything that this project has taught me, it's that this is just the tip of the iceberg in terms of React's capabilities. It really can do so much. While a lot of patterns seem much clearer, I of course feel like I am just scratching the surface in terms of what I can learn to do. Which I hope to do, even though my journey at Flatiron is coming to a close, and I'll be moving onto the unknown. 
+
+All in all, I'm fairly pleased with how this project turned out, and am amazed it's the final one as part of my time here. I came into Flatiron knowing absolutely nothing about coding whatsoever, and have come out with so many new skills, that it can be hard to be down on myself for what I don't know. Instead, I want to look at it as all the things I have learned and can do. And hopefully this is just the beginning of learning more. 
