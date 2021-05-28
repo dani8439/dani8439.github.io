@@ -89,4 +89,138 @@ export default function collectionReducer(state = {collections: []}, action) {
 }
 ```
 
-Life is so much simpler having `Collections` and `Pieces` as completely separate routes. 
+Life is so much simpler having `Collections` and `Pieces` as completely separate routes. I will avoid nesting in the future if I can avoid it. 
+
+## Onto the interesting stuff 
+
+Like so many others, struggling to grasp the concepts of React, Redux, thunk, Middleware, state, props and the like, drove me a little batty. 
+
+One particular thing that I wanted for a user to be able to do, was to click on an edit form, and have the edit form pre-filled in with all the information of a particular collection, or piece that they were editing. Using a Class Component, that hooks into the state in order to manipulate it in PieceEdit, after talking with a few people, and reading documentation, I was able to use both `componentDidMount` and optional chaining. `componentDidMount` fires when the page is loaded, and at that point, sets the state of my attributes. By using optional chaining, it checks to see if a particular attribute exists, and if it exists, sets the state to that. Same thing goes inside of the render itself of each edit card, so that *if* a `pattern_name` or `quantity` exists, the form is pre-filled out with that information. 
+
+Then, as a person fills out the form, `handleChange` hooks into the state, altering the props as a person types. `handleSubmit` then sets the edited piece to this new state, calls the `editPiece` action which makes a call to the backend and the CRUD actions to update the database. Buried within the `handleSubmit` function, is also a method called `onSave`. `onSave` is passed down from PieceContainer.js, and is assigned to a function called `handleEdit`. In PieceContainer.js lives the function `handleEdit`, which sets the state of the `pieceToBeEdited` to the current `piece` that has been clicked. Within the render of `PieceEdit` there is a conditional render. If there's no piece to be edited, a user sees the form on the page to add a new piece. But, if there is a piece to be edited, instead, they see an edit form. The prop of the `pieceToBeEdited` is passed down. Then the `hideEdit` function toggles between a boolean of true and false. When a user clicks on the submit button within PieceEdit, the button then toggles to false, and the form disappears. 
+
+The code for both components is below: 
+
+### PieceEdit.js
+```
+import React from 'react';
+import { connect } from 'react-redux';
+import { editPiece } from '../actions/editPiece'
+
+class PieceEdit extends React.Component {
+
+    state = {
+        collection_id: '',
+        piece_name: '',
+        pattern_name: '',
+        quantity: '',
+        image_url: ''
+    }
+
+
+    componentDidMount() {
+        this.setState({
+            collection_id: this.props.piece?.collection_id,
+            piece_name: this.props.piece?.piece_name,
+            pattern_name: this.props.piece?.pattern_name,
+            quantity: this.props.piece?.quantity,
+            image_url: this.props.piece?.image_url
+
+        })
+    }
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value 
+        })
+
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        let piece = {...this.state, id: this.props.piece.id}
+        this.props.editPiece(piece)
+        this.props.onSave();
+
+    }
+
+
+    render() {
+        return (
+            <div className="edit-card"> 
+                <h1>Edit Piece</h1>
+                <form onSubmit={this.handleSubmit}>
+                <label>Piece Name:</label>
+                    <input type="text" placeholder="Piece Name" name="piece_name" defaultValue={this.props.piece?.piece_name} onChange={this.handleChange}/><br></br>
+                    <br></br>
+                    <label>Pattern Name:</label>
+                    <input type="text" placeholder="Pattern Name" name="pattern_name" defaultValue={this.props.piece?.pattern_name} onChange={this.handleChange}/><br></br>
+                    <br></br>
+                    <label>Image:</label>
+                    <input type="text" placeholder="Image Url" name="image_url" defaultValue={this.props.piece?.image_url} onChange={this.handleChange}/><br></br>
+                    <br></br>
+                    <label>Quantity:</label>
+                    <input type="text" placeholder="Quantity" name="quantity" defaultValue={this.props.piece?.quantity} onChange={this.handleChange}/><br></br>
+                    <br></br>
+                    <input type="submit" value="Edit This Piece"></input>
+                </form>
+            </div>
+
+        )
+    }
+}
+
+export default connect(null, {editPiece})(PieceEdit);
+```
+
+### PieceContainer.js
+```
+import React from 'react';
+import PieceInput from '../components/PieceInput'
+import Pieces from '../components/Pieces'
+import PieceEdit from '../components/PieceEdit'
+
+class PiecesContainer extends React.Component {
+
+    state = {
+        pieceToBeEdited: null
+    }
+
+    handleEdit = (piece) => {
+        // console.log(piece)
+        this.setState({
+            pieceToBeEdited: piece
+        })
+    }
+
+    hideEdit = () => {
+        console.log("hide Me")
+        this.setState({
+            pieceToBeEdited: null
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                {
+                    !this.state.pieceToBeEdited && <PieceInput collection={this.props.collection}/>
+                }
+                {
+                    this.state.pieceToBeEdited && <PieceEdit piece={this.state.pieceToBeEdited} onSave={this.hideEdit} />
+                }
+                <Pieces pieces={this.props.collection && this.props.collection.pieces} onEdit={this.handleEdit} />
+
+            </div>
+        )
+    }
+
+}
+
+export default PiecesContainer 
+```
+
+And when on the webpage itself a user will see either this, 
+
+
+Or this, depending on the truthy or falsy value of `hideEdit`
