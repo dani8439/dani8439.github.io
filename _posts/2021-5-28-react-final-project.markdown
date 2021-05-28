@@ -220,7 +220,11 @@ class PiecesContainer extends React.Component {
 export default PiecesContainer 
 ```
 
-And when on the webpage itself a user will see either this, 
+And when on the webpage itself a user will see either this:
+ 
 
+<img width="1381" alt="Screen Shot 2021-05-28 at 4 05 29 PM" src="https://user-images.githubusercontent.com/26771302/120036993-ede04c00-bfce-11eb-9497-1302e9a487bb.png">
 
-Or this, depending on the truthy or falsy value of `hideEdit`
+Or this, depending on the truthy or falsy value of `hideEdit`:
+
+<img width="1405" alt="Screen Shot 2021-05-28 at 4 05 42 PM" src="https://user-images.githubusercontent.com/26771302/120037048-018bb280-bfcf-11eb-9c0b-6cdd03132f19.png">
