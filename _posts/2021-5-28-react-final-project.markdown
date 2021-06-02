@@ -19,7 +19,8 @@ At first I built my application while watching the Expense Tracker videos by Ann
 I got to the point of wanting to do basic editing capabilities on any instance of the `Piece` class. Because of how the videos were layed out, I initially had 
 nested routes of `http:localhost3000/api/v1/collections` and `http:localhost3000/api/v1/collections/{collection.id}/pieces/{piece.id}`. And when it came down to 
 trying to edit a piece, creating a reducer for such a nested piece of data was an enormous headache. Rather than having a fairly shallow reducer as I had with something
-like editing a collection: 
+like editing a collection. 
+
 
 ```        case 'EDIT_COLLECTION':
             let collectionsThree = state.collections.map(collection => {
@@ -32,11 +33,13 @@ like editing a collection:
             return {...state, collections: collectionsThree}
 ```
 
+
 It grew and grew, first trying to find the collection. Then finding the associated pieces. Then finding the particular piece I wanted to update. Thankfully, in 
 Open Office Hours for the project, the always helpful Dakota said that the reason why doing such a thing was such a pain, was because most people avoided it. By
 unnesting my routes, I could do away with a lot of headaches, and have my reducers be much more shallow, and not feel like I was picking through a needle in a haystack
 in order to manipulate and send back and forth the right information from frontend to backend. And after a few days of debugging and untangling my code, as it turned out
-unnesting is the sane thing to do when it comes to routes. While my `CollectionReducer` doesn't really look that interesting on the whole, 
+unnesting is the sane thing to do when it comes to routes. While my `CollectionReducer` doesn't really look that interesting on the whole. 
+
 
 ```
 export default function collectionReducer(state = {collections: []}, action) {
@@ -101,7 +104,8 @@ Then, as a person fills out the form, `handleChange` hooks into the state, alter
 
 The code for both components is below: 
 
-### PieceEdit.js
+PieceEdit.js
+
 ```
 import React from 'react';
 import { connect } from 'react-redux';
@@ -173,7 +177,8 @@ class PieceEdit extends React.Component {
 export default connect(null, {editPiece})(PieceEdit);
 ```
 
-### PieceContainer.js
+PieceContainer.js
+
 ```
 import React from 'react';
 import PieceInput from '../components/PieceInput'
