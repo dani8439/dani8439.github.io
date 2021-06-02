@@ -22,15 +22,16 @@ trying to edit a piece, creating a reducer for such a nested piece of data was a
 like editing a collection. 
 
 
-```        case 'EDIT_COLLECTION':
-            let collectionsThree = state.collections.map(collection => {
-                if (collection.id === action.payload.id) {
-                    return action.payload
-                } else {
-                    return collection
-                }
-            })
-            return {...state, collections: collectionsThree}
+```
+case 'EDIT_COLLECTION':
+  let collectionsThree = state.collections.map(collection => {
+    if (collection.id === action.payload.id) {
+      return action.payload
+    } else {
+      return collection
+    }
+   })
+  return {...state, collections: collectionsThree}
 ```
 
 
@@ -88,7 +89,6 @@ export default function collectionReducer(state = {collections: []}, action) {
         default: 
             return state 
     }
-
 }
 ```
 
@@ -112,7 +112,6 @@ import { connect } from 'react-redux';
 import { editPiece } from '../actions/editPiece'
 
 class PieceEdit extends React.Component {
-
     state = {
         collection_id: '',
         piece_name: '',
@@ -173,7 +172,6 @@ class PieceEdit extends React.Component {
         )
     }
 }
-
 export default connect(null, {editPiece})(PieceEdit);
 ```
 
@@ -186,7 +184,6 @@ import Pieces from '../components/Pieces'
 import PieceEdit from '../components/PieceEdit'
 
 class PiecesContainer extends React.Component {
-
     state = {
         pieceToBeEdited: null
     }
@@ -219,9 +216,7 @@ class PiecesContainer extends React.Component {
             </div>
         )
     }
-
 }
-
 export default PiecesContainer 
 ```
 
